@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tienda_con_delivery/src/utils/my_colors.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,25 +11,49 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Flutter Delivery App'),
-      ),
-      body: Stack(
-        children: [
-          Container(
-            width: 150,
-            height: 150,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
-              color: Theme.of(context).primaryColor,
+    return Scaffold(      
+      body: Container(
+        
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset('assets/img/delivery.png',
+            height: 200,
+            width: 200,
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 60, left: 60),
-            child: const Text('Login'),
-          ),
-        ],
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Email',
+              ),
+            ),
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Contraseña',
+              ),
+            ),
+            ElevatedButton(onPressed: () {}, child: Text('Iniciar Sesion')),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              Text('No tienes cuenta?',
+                  style: TextStyle(
+                    color: MyColors.primaryColor, 
+                    ),
+                  ),
+              SizedBox(width: 10,),
+              TextButton(
+                onPressed: () {}, 
+                child: Text(
+                  'Registrate',
+                  style: TextStyle(
+                    color: MyColors.primaryColor, 
+                    fontWeight: FontWeight.bold),
+                    ),
+                    ),
+            ]),
+          ],
+        ),
       ),
     );
   }
