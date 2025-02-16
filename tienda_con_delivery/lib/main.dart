@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tienda_con_delivery/src/login/login_page.dart';
+import 'package:tienda_con_delivery/src/utils/my_colors.dart';
+
 
 void main() {
   runApp(const MyApp());
 }
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -19,10 +22,14 @@ class _MyAppState extends State<MyApp> {
       title: 'DeliveryApp con Flutter', 
       initialRoute: 'login',
       routes: {
-        'login': (BuildContext context) => LoginPage(),
-      } ,
-      theme: ThemeData(
-        primarySwatch:  Colors.lightGreen,
+        'login': (BuildContext context) => const LoginPage(),
+      },
+      theme: ThemeData(        
+        primaryColor: MyColors.primaryColor,
+        scaffoldBackgroundColor: Colors.lightGreen[50],
+        appBarTheme: AppBarTheme(
+          backgroundColor: MyColors.primaryColor,
+        ),
       ),
     );
   }
