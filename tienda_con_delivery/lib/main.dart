@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
       },
       theme: ThemeData(        
         primaryColor: MyColors.primaryColor,
-        scaffoldBackgroundColor: Colors.lightGreen[50],
+        scaffoldBackgroundColor: const Color.fromARGB(143, 225, 255, 250),
         appBarTheme: AppBarTheme(
           backgroundColor: MyColors.primaryColor,
         ),

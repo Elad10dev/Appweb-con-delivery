@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tienda_con_delivery/src/utils/my_colors.dart';
 
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -17,10 +18,11 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _imageBanner(),
-            _textFieldEmail(),
-            _textFieldEmailPassword(),
-            _buttonIngresar(),
+            
+            _imageBanner(),            
+            _textFieldEmail(),            
+            _textFieldEmailPassword(),            
+            _buttonIngresar(),            
             _noTienesCuenta(),            
           ],
         ),
@@ -28,28 +30,87 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
   Widget _imageBanner() {
-    return Image.asset('assets/img/delivery.png',
-            height: 200,
-            width: 200,
-            );
+    return Container(
+      margin: EdgeInsets.only(
+        top: 100,
+        bottom: MediaQuery.of(context).size.height * 0.2),
+      child: Image.asset('assets/img/delivery.png',
+              height: 200,
+              width: 200,
+              ),
+    );
   }
   Widget _textFieldEmail(){
-    return TextField(
-              decoration: InputDecoration(
-                hintText: 'Email',
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 50 , vertical: 5),
+      decoration: BoxDecoration(
+        color: MyColors.primaryOpacity,
+        borderRadius: BorderRadius.circular(30), 
+      ),
+      child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Correo electronico o numero de telefono',
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.all(15),
+                  hintStyle: TextStyle(
+                    color: MyColors.primaryColorDark
+                    ),
+                  prefixIcon: Icon(
+                    Icons.email, 
+                    color: MyColors.primaryColor,
+                    )
+                ),
               ),
-            );
+    );
   }
   Widget _textFieldEmailPassword(){
-    return TextField(
-              decoration: InputDecoration(
-                hintText: 'Contraseña',
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      decoration: BoxDecoration(
+        color: MyColors.primaryOpacity,
+        borderRadius: BorderRadius.circular(30), 
+      ),
+      child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Password o contraseña ',
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.all(15),
+                  hintStyle: TextStyle(
+                    color: MyColors.primaryColorDark
+                    ),
+                  prefixIcon: Icon(
+                    Icons.lock, 
+                    color: MyColors.primaryColor,
+                    )
+                ),
               ),
-            );
+    );
   }
 
   Widget _buttonIngresar(){
-    return ElevatedButton(onPressed: () {}, child: Text('Iniciar Sesion'));
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      child: ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          backgroundColor: MyColors.primaryColor,        
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),          
+            side: BorderSide(
+              color: Color.fromARGB(255, 0, 0, 0),
+              style: BorderStyle.solid,
+              width: 2,
+              
+            ),          
+          ),
+          padding: EdgeInsets.symmetric(vertical: 5),
+      
+          ), 
+        child: Text('Iniciar Sesion'),
+        ),
+    );
+      
   }
 
   Widget _noTienesCuenta(){
@@ -61,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                     color: MyColors.primaryColor, 
                     ),
                   ),
-              SizedBox(width: 10,),
+
               TextButton(
                 onPressed: () {}, 
                 child: Text(
