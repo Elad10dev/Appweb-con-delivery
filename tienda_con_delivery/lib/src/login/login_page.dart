@@ -12,28 +12,48 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(      
-      body: Container(
-        
+      body: Container(        
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset('assets/img/delivery.png',
+            _imageBanner(),
+            _textFieldEmail(),
+            _textFieldEmailPassword(),
+            _buttonIngresar(),
+            _noTienesCuenta(),            
+          ],
+        ),
+      ),
+    );
+  }
+  Widget _imageBanner() {
+    return Image.asset('assets/img/delivery.png',
             height: 200,
             width: 200,
-            ),
-            TextField(
+            );
+  }
+  Widget _textFieldEmail(){
+    return TextField(
               decoration: InputDecoration(
                 hintText: 'Email',
               ),
-            ),
-            TextField(
+            );
+  }
+  Widget _textFieldEmailPassword(){
+    return TextField(
               decoration: InputDecoration(
                 hintText: 'Contraseña',
               ),
-            ),
-            ElevatedButton(onPressed: () {}, child: Text('Iniciar Sesion')),
-            Row(
+            );
+  }
+
+  Widget _buttonIngresar(){
+    return ElevatedButton(onPressed: () {}, child: Text('Iniciar Sesion'));
+  }
+
+  Widget _noTienesCuenta(){
+    return Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
               Text('No tienes cuenta?',
@@ -51,10 +71,8 @@ class _LoginPageState extends State<LoginPage> {
                     fontWeight: FontWeight.bold),
                     ),
                     ),
-            ]),
-          ],
-        ),
-      ),
-    );
+            ]);
   }
 }
+
+
