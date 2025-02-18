@@ -15,18 +15,55 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(      
       body: Container(        
         width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: Stack(
           children: [
-            
-            _imageBanner(),            
-            _textFieldEmail(),            
-            _textFieldEmailPassword(),            
-            _buttonIngresar(),            
-            _noTienesCuenta(),            
+            Positioned(
+              top: -80,
+              left: -100,
+              child: _circleLogin(),
+              ),
+              Positioned(
+                top: 60,
+                left:25,
+                child: _textLogin(),
+                ),
+              
+            Column(
+              children: [
+                
+                _imageBanner(),                        
+                _textFieldEmail(),            
+                _textFieldEmailPassword(),            
+                _buttonIngresar(),            
+                _noTienesCuenta(),            
+              ],
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _textLogin(){
+    return Text(
+      'LOGIN',
+      style: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+        fontSize: 22,
+        fontFamily: 'NimbusSans',
+      ),
+    );
+  }
+  Widget _circleLogin(){
+    return Container(
+      width: 240,
+      height: 230,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100),
+        color: MyColors.primaryColor,
+      ),
+
     );
   }
   Widget _imageBanner() {
