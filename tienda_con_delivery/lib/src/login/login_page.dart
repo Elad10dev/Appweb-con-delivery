@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tienda_con_delivery/src/utils/my_colors.dart';
 
 
@@ -18,13 +19,13 @@ class _LoginPageState extends State<LoginPage> {
         child: Stack(
           children: [
             Positioned(
-              top: -80,
-              left: -100,
+              top: -60,
+              left: -90,
               child: _circleLogin(),
               ),
               Positioned(
-                top: 60,
-                left:25,
+                top: 40,
+                left:15,
                 child: _textLogin(),
                 ),
               
@@ -50,15 +51,15 @@ class _LoginPageState extends State<LoginPage> {
       style: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
-        fontSize: 22,
+        fontSize: 18,
         fontFamily: 'NimbusSans',
       ),
     );
   }
   Widget _circleLogin(){
     return Container(
-      width: 240,
-      height: 230,
+      width: 200,
+      height: 180,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
         color: MyColors.primaryColor,
@@ -69,17 +70,19 @@ class _LoginPageState extends State<LoginPage> {
   Widget _imageBanner() {
     return Container(
       margin: EdgeInsets.only(
-        top: 100,
-        bottom: MediaQuery.of(context).size.height * 0.2),
-      child: Image.asset('assets/img/delivery.png',
-              height: 200,
-              width: 200,
+        top: 70,
+        bottom: MediaQuery.of(context).size.height * 0.1,),
+      child: Lottie.asset('assets/json/Login1.json',
+              width: 350, 
+              height: 250,
+              fit: BoxFit.fill,
+              
               ),
     );
   }
   Widget _textFieldEmail(){
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50 , vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 30 , vertical: 5),
       decoration: BoxDecoration(
         color: MyColors.primaryOpacity,
         borderRadius: BorderRadius.circular(30), 
@@ -102,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
   }
   Widget _textFieldEmailPassword(){
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
       decoration: BoxDecoration(
         color: MyColors.primaryOpacity,
         borderRadius: BorderRadius.circular(30), 
@@ -127,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buttonIngresar(){
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
