@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
               child: _circleLogin(),
               ),
               Positioned(
-                top: 40,
+                top:40,
                 left:15,
                 child: _textLogin(),
                 ),
