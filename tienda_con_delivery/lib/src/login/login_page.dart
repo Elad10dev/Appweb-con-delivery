@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:lottie/lottie.dart';
+import 'package:tienda_con_delivery/src/login/login_controller.dart';
 import 'package:tienda_con_delivery/src/utils/my_colors.dart';
 
 
@@ -11,8 +13,25 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  final LoginController _con = LoginController();
+  @override
+  void initState() {
+    // 
+    super.initState();
+    
+    
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      
+      _con.init(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    
+
     return Scaffold(      
       // ignore: sized_box_for_whitespace
       body: Container(        
@@ -163,16 +182,17 @@ class _LoginPageState extends State<LoginPage> {
                     color: MyColors.primaryColor, 
                     ),
                   ),
-
-              TextButton(
-                onPressed: () {}, 
+              SizedBox(width: 10,),
+              GestureDetector(
+                onTap: _con.goToRegisterPage,
                 child: Text(
-                  'Registrate',
-                  style: TextStyle(
-                    color: MyColors.primaryColor, 
-                    fontWeight: FontWeight.bold),
-                    ),
-                    ),
+                    'Registrate',
+                    style: TextStyle(
+                      color: MyColors.primaryColor, 
+                      fontWeight: FontWeight.bold),
+                      ),
+              ),
+                    
             ]);
   }
 }

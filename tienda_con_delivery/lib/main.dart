@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tienda_con_delivery/src/login/login_page.dart';
+import 'package:tienda_con_delivery/src/register/register.dart';
 import 'package:tienda_con_delivery/src/utils/my_colors.dart';
 
 
@@ -23,6 +24,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: 'login',
       routes: {
         'login': (BuildContext context) => const LoginPage(),
+        'register': (BuildContext context) => const RegisterPage(),
       },
       theme: ThemeData(
         fontFamily: 'dhaelzot',        
