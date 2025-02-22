@@ -24,7 +24,8 @@ class _MyAppState extends State<MyApp> {
       routes: {
         'login': (BuildContext context) => const LoginPage(),
       },
-      theme: ThemeData(        
+      theme: ThemeData(
+        fontFamily: 'dhaelzot',        
         primaryColor: MyColors.primaryColor,
         scaffoldBackgroundColor: const Color.fromARGB(143, 225, 255, 250),
         appBarTheme: AppBarTheme(
