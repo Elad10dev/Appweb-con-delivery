@@ -49,15 +49,17 @@ class _LoginPageState extends State<LoginPage> {
                 child: _textLogin(),
                 ),
               
-            Column(
-              children: [
-                
-                _imageBanner(),                        
-                _textFieldEmail(),            
-                _textFieldEmailPassword(),            
-                _buttonIngresar(),            
-                _noTienesCuenta(),            
-              ],
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  
+                  _imageBanner(),                        
+                  _textFieldEmail(),            
+                  _textFieldEmailPassword(),            
+                  _buttonIngresar(),            
+                  _noTienesCuenta(),            
+                ],
+              ),
             ),
           ],
         ),
