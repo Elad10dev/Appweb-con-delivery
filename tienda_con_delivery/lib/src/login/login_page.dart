@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _imageBanner() {
     return Container(
       margin: EdgeInsets.only(
-        top: 70,
+        top: 120,
         bottom: MediaQuery.of(context).size.height * 0.1,),
       child: Lottie.asset('assets/json/Login1.json',
               width: 350, 

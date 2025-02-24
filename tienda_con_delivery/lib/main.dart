@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         fontFamily: 'dhaelzot',        
         primaryColor: MyColors.primaryColor,
-        scaffoldBackgroundColor: const Color.fromARGB(143, 225, 255, 250),
+        scaffoldBackgroundColor:Colors.white,
         appBarTheme: AppBarTheme(
           backgroundColor: MyColors.primaryColor,
         ),
