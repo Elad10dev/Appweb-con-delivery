@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:tienda_con_delivery/src/register/regster_controller.dart';
+import 'package:tienda_con_delivery/src/pages/register/regster_controller.dart';
 import 'package:tienda_con_delivery/src/utils/my_colors.dart';
 
 class RegisterPage extends StatefulWidget {

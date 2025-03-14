@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tienda_con_delivery/src/login/login_page.dart';
-import 'package:tienda_con_delivery/src/register/register.dart';
+import 'package:tienda_con_delivery/src/pages/login/login_page.dart';
+import 'package:tienda_con_delivery/src/pages/register/register.dart';
 import 'package:tienda_con_delivery/src/utils/my_colors.dart';
 
 

@@ -1,0 +1,2 @@
+C:/Users/eladio/Desktop/PORTAFOLIO/Flutter/CURSO DELIVERYAPP UDEMY/Tienda con Delivery/tienda_con_delivery/android/app/.cxx/Debug/1s4g6p4b/x86/CMakeFiles/edit_cache.dir
+C:/Users/eladio/Desktop/PORTAFOLIO/Flutter/CURSO DELIVERYAPP UDEMY/Tienda con Delivery/tienda_con_delivery/android/app/.cxx/Debug/1s4g6p4b/x86/CMakeFiles/rebuild_cache.dir
