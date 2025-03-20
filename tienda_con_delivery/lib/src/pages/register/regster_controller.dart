@@ -15,7 +15,7 @@ class RegisterController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
-  UsersProvider usersProvider = new UsersProvider();
+  UsersProvider usersProvider = UsersProvider();
 
   Future init(BuildContext context) async {
     this.context = context;
@@ -59,7 +59,7 @@ class RegisterController {
 
 
 
-    print('RESPUESTA: ${responseApi?.toJson()}'); 
+    print('RESPUESTA: ${responseApi.toJson()}'); 
 
     print(email);
     print(name);    

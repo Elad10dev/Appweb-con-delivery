@@ -26,15 +26,16 @@ class User {
     });
 
     factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"],
-        name: json["name"],
-        lastname: json["lastname"],
-        email: json["email"],
-        phone: json["phone"],
-        password: json["password"],
-        sessionToken: json["session_token"],
-        image: json["image"],
-    );
+    id: json["id"],
+    name: json["name"] ?? '',
+    lastname: json["lastname"] ?? '',
+    email: json["email"] ?? '',
+    phone: json["phone"] ?? '',
+    password: json["password"] ?? '',
+    sessionToken: json["session_token"],
+    image: json["image"], // Si este campo puede ser null, no necesitas manejarlo explícitamente aquí.
+);
+
 
     Map<String, dynamic> toJson() => {
         "id": id,

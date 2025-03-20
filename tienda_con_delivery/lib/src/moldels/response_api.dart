@@ -7,7 +7,8 @@ class ResponseApi {
     ResponseApi({
         required this.message,
         required this.error,
-        required this.succes,
+        required this.succes, 
+        required this.data,
     });
 
     ResponseApi.fromJson(Map<String, dynamic> json) {
@@ -26,5 +27,6 @@ class ResponseApi {
         "message": message,
         "error": error,
         "succes": succes,
+        "data": data,
     };
 }
