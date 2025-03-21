@@ -29,4 +29,10 @@ Future<bool> remove(String key) async{
   return pref.remove(key);
 }
 
+void logout (BuildContext context) async {
+  await remove('user');
+  // ignore: use_build_context_synchronously
+  Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
+}
+
 }
