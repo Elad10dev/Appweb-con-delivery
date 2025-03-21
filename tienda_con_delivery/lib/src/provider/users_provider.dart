@@ -16,84 +16,138 @@ class UsersProvider {
     this.context = context;
   }
 
-  Future<ResponseApi?> create(User user) async{
-      try {
-        Uri url = Uri.http(_url, '$_api/create');
-        String bodyParams = json.encode(user);
-        Map<String, String> headers = {
-        'Content-type': 'application/json'
-        };
-
-        final res = await http.post(url, headers: headers, body: bodyParams);
-        final data = json.decode(res.body);
-        ResponseApi responseApi = ResponseApi.fromJson(data);
-        return responseApi;
-
-      } catch (e) {
-        print('Error: $e');
-        return null;
-      }
-  }
-
-  Future<ResponseApi?> login(String email, String password) async {
-  if (email.isEmpty || password.isEmpty) {
-    print("Error: Campos de email o contraseña vacíos.");
-    return ResponseApi(succes: false, message: "Datos incompletos", error: '404', data: null);
-  }
+  Future<ResponseApi?> create(User user) async {
   try {
-    Uri url = Uri.http(_url, '$_api/login');
-    String bodyParams = json.encode({
-      'email': email,
-      'password': password,
+    Uri url = Uri.http(_url, '$_api/create');
+
+    Map<String, dynamic> userData = user.toJson();
+    userData.forEach((key, value) {
+      if (value == null) {
+        userData[key] = ''; // Reemplaza valores nulos con cadenas vacías
+      }
     });
+
+    String bodyParams = json.encode(userData);
     Map<String, String> headers = {
       'Content-type': 'application/json',
     };
 
     final res = await http.post(url, headers: headers, body: bodyParams);
 
+    print('Respuesta del servidor: ${res.body}');
+
     if (res.statusCode == 200 || res.statusCode == 201) {
-      // Decodifica la respuesta del servidor
-      final Map<String, dynamic> data = json.decode(res.body) as Map<String, dynamic>;
+      // Decodificar la respuesta JSON del servidor
+      final data = json.decode(res.body);
+      json.decode(res.body);
 
-      if (data.containsKey("sucess") && data["sucess"] == true) {
-        // Extrae la información del usuario dentro de "data"
-        if (data.containsKey("data") && data["data"] != null) {
-          final userJson = data['data'] as Map<String, dynamic>;
-          final user = User.fromJson(userJson);
-
-          // Crea la respuesta final con el usuario
-          ResponseApi responseApi = ResponseApi(
-            succes: true,
-            message: data['message'],
-            data: jsonEncode(user.toJson()), // Aquí pasamos el usuario
-            error: "null" // No hay error
-          );
-          
-          return responseApi;
-        } else {
-          print("La respuesta no contiene la información esperada del usuario.");
-          return ResponseApi(succes: false, message: "No se encontró información del usuario.", error: '404', data: null);
+// Validar si "sucess" está presente y corregirlo
+      if (data.containsKey('success')) {
+         data['success'] = data['success']; // Copia el valor de "sucess" a "success"
+          data.remove('success'); // Elimina la clave incorrecta
         }
-      } else {
-        print("Formato inesperado de respuesta: ${res.body}");
-        return ResponseApi(succes: false, message: "Formato de respuesta inválido.", error: '404', data: null);
+
+
+      // Reemplaza la clave incorrecta (temporal)
+      if (data.containsKey('success')) {
+        data['success'] = data['success']; // Copia el valor de 'success' a 'success'
+        data.remove('success'); // Elimina la clave incorrecta
       }
+
+      ResponseApi responseApi = ResponseApi.fromJson(data);
+      return responseApi;
     } else {
-      print("Error: Respuesta del servidor: ${res.statusCode}");
-      print("Cuerpo: ${res.body}");
-      return ResponseApi(succes: false, message: "Error en el servidor (${res.statusCode}).", error: '404', data: null);
+      print('Error en la solicitud: Código ${res.statusCode}');
+      return ResponseApi(
+        success: false,
+        message: 'Error en el servidor',
+        data: null,
+        error: 'Error HTTP ${res.statusCode}',
+      );
     }
   } catch (e) {
     print('Error: $e');
-    return ResponseApi(succes: false, message: "Error al conectar con el servidor.", error: '404', data: null);
+    return ResponseApi(
+      success: false,
+      message: 'Error inesperado al conectar con el servidor.',
+      data: null,
+      error: e.toString(),
+    );
   }
-
-  
 }
 
 
 
+  Future<ResponseApi?> login(String email, String password) async {
+    if (email.isEmpty || password.isEmpty) {
+      print("Error: Campos de email o contraseña vacíos.");
+      return ResponseApi(
+        success: false,
+        message: "Datos incompletos",
+        error: '400',
+        data: null,
+      );
+    }
 
+    try {
+      // Construcción de la URL
+      Uri url = Uri.http(_url, '$_api/login');
+      print("URL generada: $url"); // Log de la URL generada
 
+      // Cuerpo de la solicitud
+      String bodyParams = json.encode({
+        'email': email,
+        'password': password,
+      });
+
+      // Encabezados HTTP
+      Map<String, String> headers = {
+        'Content-Type': 'application/json',
+      };
+
+      // Solicitud POST
+      final res = await http.post(url, headers: headers, body: bodyParams);
+
+      print("Estado de la respuesta: ${res.statusCode}"); // Log del estado
+
+      // Manejo de respuesta
+      if (res.statusCode == 200 || res.statusCode == 201) {
+        print("Respuesta exitosa: ${res.body}");
+        final data = json.decode(res.body);
+        return ResponseApi.fromJson(data);
+      } else if (res.statusCode == 404) {
+        print("Error: Endpoint no encontrado.");
+        return ResponseApi(
+          success: false,
+          message: "Ruta no encontrada en el servidor.",
+          error: '404',
+          data: null,
+        );
+      } else if (res.statusCode >= 500) {
+        print("Error: Problema del servidor.");
+        return ResponseApi(
+          success: false,
+          message: "Problema en el servidor (${res.statusCode}).",
+          error: '${res.statusCode}',
+          data: null,
+        );
+      } else {
+        print("Respuesta inesperada: ${res.body}");
+        return ResponseApi(
+          success: false,
+          message: "Error desconocido (${res.statusCode}).",
+          error: '${res.statusCode}',
+          data: null,
+        );
+      }
+    } catch (e) {
+      print("Error: $e");
+      return ResponseApi(
+        success: false,
+        message: "Error al conectar con el servidor.",
+        error: '500',
+        data: null,
+      );
+    }
+  }
 }

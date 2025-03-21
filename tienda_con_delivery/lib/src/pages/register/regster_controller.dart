@@ -23,49 +23,63 @@ class RegisterController {
   }
 
   void register() async {
-    String email = emailController.text.trim();
-    String name = nameController.text;
-    String lastname = lastnameController.text;
-    String phone = phoneController.text.trim();
-    String password = passwordController.text.trim();
-    String confirmPassword = confirmPasswordController.text.trim();
+  String email = emailController.text.trim();
+  String name = nameController.text.trim();
+  String lastname = lastnameController.text.trim();
+  String phone = phoneController.text.trim();
+  String password = passwordController.text.trim();
+  String confirmPassword = confirmPasswordController.text.trim();
 
-    if (email.isEmpty || name.isEmpty || lastname.isEmpty || phone.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
-      MySnackbar.show(context!, "Porfavor ingresa datos faltantes..!! ✨");
-      return;
+  if (email.isEmpty || name.isEmpty || lastname.isEmpty || phone.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+    MySnackbar.show(context!, "Porfavor ingresa datos faltantes..!! ✨");
+    return;
+  }
+
+  if (confirmPassword != password) {
+    MySnackbar.show(context!, "Las contraseñas no coinciden..!! 🚫");
+    return;
+  }
+
+  if (password.length < 6) {
+    MySnackbar.show(context!, "La contraseña debe tener al menos 6 caracteres..!! ❌");
+    return;
+  }
+
+  User user = User(
+    email: email, 
+    name: name, 
+    lastname: lastname, 
+    phone: phone, 
+    password: password,
+  );
+
+  ResponseApi? responseApi = await usersProvider.create(user);
+
+  if (responseApi != null) {
+    print('responseApi.success: ${responseApi.success}');
+    if (responseApi.success) {
+      print('Redirigiendo a login...');
+      MySnackbar.show(context!, responseApi.message);
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.pushReplacementNamed(context!, 'login');
+      });
+    } else {
+      print('Error: ${responseApi.message}');
+      MySnackbar.show(context!, "Error: ${responseApi.message}");
     }
-
-    if (confirmPassword != password) {
-      MySnackbar.show(context!, "Las contraseñas no coinciden..!! 🚫",);
-      return;
-    }
-
-    if (password.length < 6) {
-      MySnackbar.show(context!, "La contraseña debe tener al menos 6 caracteres..!! ❌");
-      return;
-    }
-    
-    User user = User(
-      email: email, 
-      name: name, 
-      lastname: lastname, 
-      phone: phone, 
-      password: password,
-      );
-
-    ResponseApi? responseApi = await usersProvider.create(user);
-
-    MySnackbar.show(context!, responseApi!.message);
+  } else {
+    MySnackbar.show(context!, "Error inesperado al conectar con el servidor.");
+  }
 
 
 
-    print('RESPUESTA: ${responseApi.toJson()}'); 
 
-    print(email);
-    print(name);    
-    print(lastname);    
-    print(phone);    
-    print(password);    
-    print(confirmPassword);
+    print('RESPUESTA: ${responseApi?.toJson()}'); 
+
+   
+  }
+
+  void back() {
+    Navigator.pop(context!);
   }
 }
