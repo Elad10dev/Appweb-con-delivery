@@ -71,7 +71,14 @@ class LoginController {
 
 
       // Redirigir a la página principal
-      Navigator.pushReplacementNamed(context!, 'client/products/list');
+      // Verificar la cantidad de roles
+      if (user.roles.length > 1) {
+        // Si el usuario tiene más de un rol, redirige a la página de roles
+        Navigator.pushNamedAndRemoveUntil(context!, 'roles', (route) => false);
+      } else {
+        // Si el usuario tiene un solo rol, redirige a la ruta de ese rol
+        Navigator.pushNamedAndRemoveUntil(context!, user.roles[0].route, (route) => false);
+      }
       } catch (e) {
       print('Error al procesar los datos: $e');
       MySnackbar.show(context!, "Error al procesar los datos del usuario.");
