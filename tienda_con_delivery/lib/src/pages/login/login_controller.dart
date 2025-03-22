@@ -23,7 +23,13 @@ class LoginController {
     User user = User.fromJson(await _sharedPref.read('user') ?? {});
 
     if (user.sessionToken != null) {
-      Navigator.pushReplacementNamed(context, 'client/products/list');
+      if (user.roles.length > 1) {
+        // Si el usuario tiene más de un rol, redirige a la página de roles
+        Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);
+      } else {
+        // Si el usuario tiene un solo rol, redirige a la ruta de ese rol
+        Navigator.pushNamedAndRemoveUntil(context, user.roles[0].route, (route) => false);
+      }
     }
   }
   void goToRegisterPage() {
