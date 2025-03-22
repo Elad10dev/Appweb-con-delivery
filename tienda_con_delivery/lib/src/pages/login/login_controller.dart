@@ -22,7 +22,7 @@ class LoginController {
 
     User user = User.fromJson(await _sharedPref.read('user') ?? {});
 
-    if (user?.sessionToken != null) {
+    if (user.sessionToken != null) {
       Navigator.pushReplacementNamed(context, 'client/products/list');
     }
   }
