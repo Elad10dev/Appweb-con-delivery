@@ -49,6 +49,9 @@ class LoginController {
   // Llamada al provider
   ResponseApi? responseApi = await usersProvider.login(email, password);
 
+  print('Contenido original de responseApi.data: ${responseApi?.data}');
+
+
   // Mostrar mensaje del servidor
   MySnackbar.show(context!, responseApi?.message ?? "Error desconocido.");
 

@@ -13,11 +13,10 @@ class RestaurantOrdersListPage extends StatefulWidget {
 class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
   final RestaurantOrdersListController _con = RestaurantOrdersListController();
   @override
-  void initState() {
-    // TODO: implement initState
+  void initState() {    
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      _con.init(context);
+      _con.init(context, refresh);
     });
   }
   @override
@@ -57,7 +56,8 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Nombre de Usuario',
+                Text(
+                  _con.user.name,
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.white,
@@ -65,7 +65,8 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
                 ),
                 maxLines: 1,
                 ),
-                Text('Correo Electronico',
+                Text(
+                  'Hi, ${_con.user.lastname}, ${_con.user.name}',
                 style: TextStyle(
                   fontSize: 13,
                   color: Colors.grey[200],
@@ -74,7 +75,7 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
                 ),
                 maxLines: 1,
                 ),
-                Text('Numero Telefonico',
+                Text(_con.user?.phone ?? '',
                 style: TextStyle(
                   fontSize: 13,
                   color: Colors.grey[200],
@@ -87,7 +88,9 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
                   height: 60,
                   margin: EdgeInsets.only(top: 5),
                   child: FadeInImage(
-                    image: AssetImage('assets/img/no-image.png'),
+                    image: 
+                    _con.user?.image != null ? NetworkImage(_con.user!.image!) :
+                      AssetImage('assets/img/no-image.png'),
                     fit: BoxFit.contain,
                     fadeInDuration: Duration(milliseconds: 50),
                     placeholder:AssetImage('assets/img/no-image.png') ,
@@ -110,5 +113,8 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
         ],
       ),
     );
+  }
+  void refresh() {
+    setState(() {});
   }
 }

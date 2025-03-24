@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tienda_con_delivery/src/moldels/user.dart';
 import 'package:tienda_con_delivery/src/utils/share_pref.dart';
 
 class RestaurantOrdersListController{
@@ -6,8 +7,14 @@ class RestaurantOrdersListController{
   late BuildContext context;
   final SharedPref _sharedPref = SharedPref();
   GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
-  Future init(BuildContext context) async {
+  late Function refresh;
+  late User user;
+
+  Future init(BuildContext context, Function refresh) async {
     this.context = context;
+    this.refresh = refresh;
+    user = User.fromJson(await _sharedPref.read('user') ?? {});
+    refresh();
   }
   void logout(){
     _sharedPref.logout(context);

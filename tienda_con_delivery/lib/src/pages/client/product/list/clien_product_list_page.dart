@@ -12,14 +12,14 @@ class ClientProductsListPage extends StatefulWidget {
 
 class _ClientProductsListPageState extends State<ClientProductsListPage> {
 
-  ClientProductsListController _con = ClientProductsListController();
+  final ClientProductsListController _con = ClientProductsListController();
 
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      _con.init(context);
+      _con.init(context, refresh);
     });
   }
 
@@ -66,7 +66,8 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Nombre de Usuario',
+                Text(
+                  'Hi, ${_con.user.lastname}, ${_con.user.name}',
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.white,
@@ -74,7 +75,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                 ),
                 maxLines: 1,
                 ),
-                Text('Correo Electronico',
+                Text(_con.user?.email ?? '',
                 style: TextStyle(
                   fontSize: 13,
                   color: Colors.grey[200],
@@ -83,7 +84,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                 ),
                 maxLines: 1,
                 ),
-                Text('Numero Telefonico',
+                Text(_con.user?.phone ?? '',
                 style: TextStyle(
                   fontSize: 13,
                   color: Colors.grey[200],
@@ -96,7 +97,9 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                   height: 60,
                   margin: EdgeInsets.only(top: 5),
                   child: FadeInImage(
-                    image: AssetImage('assets/img/no-image.png'),
+                    image: 
+                    _con.user.image != null ? NetworkImage(_con.user.image!) :
+                      AssetImage('assets/img/no-image.png'),
                     fit: BoxFit.contain,
                     fadeInDuration: Duration(milliseconds: 50),
                     placeholder:AssetImage('assets/img/no-image.png') ,
@@ -126,5 +129,8 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
         ],
       ),
     );
+  }
+  void refresh() {
+    setState(() {});
   }
 }
