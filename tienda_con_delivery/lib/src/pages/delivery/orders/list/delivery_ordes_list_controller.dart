@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tienda_con_delivery/src/utils/share_pref.dart';
 
-class ClientProductsListController{
+class DeliveryOrdersListController{
 
   late BuildContext context;
   final SharedPref _sharedPref = SharedPref();
