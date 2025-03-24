@@ -116,10 +116,14 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
             title: Text('Mis Pedidos'),
             trailing: Icon(Icons.add_shopping_cart_outlined),            
           ),
+          // ignore: unnecessary_null_comparison
+          _con.user != null ?
+          _con.user.roles.length > 1 ?
           ListTile(
+            onTap: _con.gotToRoles,
             title: Text('Seleccionar Rol'),
             trailing: Icon(Icons.person_outline),            
-          ),
+          ) : Container() : Container (),
           ListTile(
             onTap: _con.logout,
             title: Text('Cerrar Sesion'),

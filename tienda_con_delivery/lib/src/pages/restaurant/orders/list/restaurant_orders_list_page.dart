@@ -13,7 +13,8 @@ class RestaurantOrdersListPage extends StatefulWidget {
 class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
   final RestaurantOrdersListController _con = RestaurantOrdersListController();
   @override
-  void initState() {    
+  void initState() {
+    // TODO: implement initState
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _con.init(context, refresh);
@@ -28,7 +29,7 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
         ),
       drawer: _drwawer(),
       body: Center(
-        child: Text('RESTAURANT ORDERS LIST PAGE'),
+        child: Text('RESTAURANTE ORDERS LIST PAGE'),
       ),
     );
   }
@@ -57,7 +58,7 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  _con.user.name,
+                  'Hi, ${_con.user.lastname}, ${_con.user.name}',
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.white,
@@ -65,8 +66,7 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
                 ),
                 maxLines: 1,
                 ),
-                Text(
-                  'Hi, ${_con.user.lastname}, ${_con.user.name}',
+                Text('${_con.user.lastname},${_con.user.name}',
                 style: TextStyle(
                   fontSize: 13,
                   color: Colors.grey[200],
@@ -100,10 +100,14 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
             ],),
           ),
           
+          // ignore: unnecessary_null_comparison
+          _con.user != null ?
+          _con.user.roles.length > 1 ?
           ListTile(
+            onTap: _con.gotToRoles,
             title: Text('Seleccionar Rol'),
             trailing: Icon(Icons.person_outline),            
-          ),
+          ) : Container() : Container (),
           ListTile(
             onTap: _con.logout,
             title: Text('Cerrar Sesion'),
