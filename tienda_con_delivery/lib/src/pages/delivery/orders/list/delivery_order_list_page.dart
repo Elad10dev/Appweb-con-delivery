@@ -75,7 +75,7 @@ class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
                 ),
                 maxLines: 1,
                 ),
-                Text(_con.user?.phone ?? '',
+                Text(_con.user.phone,
                 style: TextStyle(
                   fontSize: 13,
                   color: Colors.grey[200],
@@ -89,7 +89,7 @@ class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
                   margin: EdgeInsets.only(top: 5),
                   child: FadeInImage(
                     image: 
-                    _con.user?.image != null ? NetworkImage(_con.user!.image!) :
+                    _con.user.image != null ? NetworkImage(_con.user.image!) :
                       AssetImage('assets/img/no-image.png'),
                     fit: BoxFit.contain,
                     fadeInDuration: Duration(milliseconds: 50),

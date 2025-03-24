@@ -75,7 +75,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                 ),
                 maxLines: 1,
                 ),
-                Text(_con.user?.email ?? '',
+                Text(_con.user.email,
                 style: TextStyle(
                   fontSize: 13,
                   color: Colors.grey[200],
@@ -84,7 +84,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                 ),
                 maxLines: 1,
                 ),
-                Text(_con.user?.phone ?? '',
+                Text(_con.user.phone,
                 style: TextStyle(
                   fontSize: 13,
                   color: Colors.grey[200],
